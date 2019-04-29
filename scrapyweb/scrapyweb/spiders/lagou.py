@@ -8,4 +8,7 @@ class LagouSpider(scrapy.Spider):
     start_urls = ['http://https://www.lagou.com/']
 
     def parse(self, response):
-        pass
+        for course in response.css('div.class=menu_box'):
+            yield({
+                'name': course.xpath('.//h2/text()').extract()
+                })
